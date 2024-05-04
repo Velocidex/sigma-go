@@ -3,7 +3,6 @@ package sigma
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -45,7 +44,11 @@ type Logsource struct {
 type Detection struct {
 	Searches   map[string]Search `yaml:",inline" json:",inline"`
 	Conditions Conditions        `yaml:"condition" json:"condition"`
-	Timeframe  time.Duration     `yaml:",omitempty" json:",omitempty"`
+
+	// This is not actually supported right now since there are no
+	// aggregates so we just preserve it in its string form.
+	// Timeframe  time.Duration     `yaml:",omitempty" json:",omitempty"`
+	Timeframe string `yaml:",omitempty" json:",omitempty"`
 }
 
 func (d *Detection) UnmarshalYAML(node *yaml.Node) error {
