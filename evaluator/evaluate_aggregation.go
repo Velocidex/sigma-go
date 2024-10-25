@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/bradleyjkemp/sigma-go"
+	"github.com/Velocidex/sigma-go"
 )
 
 func (rule RuleEvaluator) evaluateAggregationExpression(ctx context.Context, conditionIndex int, aggregation sigma.AggregationExpr, event Event) (bool, error) {

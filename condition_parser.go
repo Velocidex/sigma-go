@@ -1,9 +1,9 @@
 package sigma
 
 import (
+	"github.com/Velocidex/sigma-go/internal/grammar"
 	"github.com/alecthomas/participle"
 	"github.com/alecthomas/participle/lexer"
-	"github.com/bradleyjkemp/sigma-go/internal/grammar"
 )
 
 var (

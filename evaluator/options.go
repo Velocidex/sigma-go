@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/bradleyjkemp/sigma-go/evaluator/modifiers"
 
-	"github.com/bradleyjkemp/sigma-go"
+	"github.com/Velocidex/sigma-go"
 )
 
 type Option func(*RuleEvaluator)

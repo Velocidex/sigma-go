@@ -37,10 +37,10 @@ func (f *FieldMapping) UnmarshalYAML(value *yaml.Node) error {
 }
 
 type LogsourceMapping struct {
-	Logsource  `yaml:",inline"` // Matches the logsource field in Sigma rules
-	Index      LogsourceIndexes // The index(es) that should be used
-	Conditions Search           // Conditions that are added to all rules targeting this logsource
-	Rewrite    Logsource        // Rewrites this logsource (i.e. so that it can be matched by another lower precedence config)
+	Logsource  `yaml:",inline,omitempty"` // Matches the logsource field in Sigma rules
+	Index      LogsourceIndexes           // The index(es) that should be used
+	Conditions Search                     // Conditions that are added to all rules targeting this logsource
+	Rewrite    Logsource                  // Rewrites this logsource (i.e. so that it can be matched by another lower precedence config)
 }
 
 type LogsourceIndexes []string

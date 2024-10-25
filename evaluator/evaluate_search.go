@@ -4,13 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/PaesslerAG/jsonpath"
-	"github.com/bradleyjkemp/sigma-go"
-	"github.com/bradleyjkemp/sigma-go/evaluator/modifiers"
 	"path"
 	"reflect"
 	"regexp"
 	"strings"
+
+	"github.com/PaesslerAG/jsonpath"
+	"github.com/Velocidex/sigma-go"
+	"github.com/Velocidex/sigma-go/evaluator/modifiers"
 )
 
 func (rule RuleEvaluator) evaluateSearchExpression(search sigma.SearchExpr, searchResults func(string) bool) bool {

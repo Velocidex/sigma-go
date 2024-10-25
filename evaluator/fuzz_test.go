@@ -8,7 +8,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/bradleyjkemp/sigma-go"
+	"github.com/Velocidex/sigma-go"
 )
 
 const testRule = `

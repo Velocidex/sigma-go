@@ -9,18 +9,20 @@ import (
 
 type Rule struct {
 	// Required fields
-	Title     string
-	Logsource Logsource
-	Detection Detection
+	Title       string       `yaml:"title,omitempty" json:"Title,omitempty"`
+	Name        string       `yaml:"name,omitempty" json:"Name,omitempty"`
+	Logsource   Logsource    `yaml:"logsource,omitempty" json:"Logsource,omitempty"`
+	Detection   Detection    `yaml:"detection,omitempty" json:"Detection,omitempty"`
+	Correlation *Correlation `yaml:"correlation,omitempty" json:"Correlation,omitempty"`
 
-	ID          string        `yaml:",omitempty" json:",omitempty"`
-	Related     []RelatedRule `yaml:",omitempty" json:",omitempty"`
-	Status      string        `yaml:",omitempty" json:",omitempty"`
-	Description string        `yaml:",omitempty" json:",omitempty"`
-	Author      string        `yaml:",omitempty" json:",omitempty"`
-	Level       string        `yaml:",omitempty" json:",omitempty"`
-	References  []string      `yaml:",omitempty" json:",omitempty"`
-	Tags        []string      `yaml:",omitempty" json:",omitempty"`
+	ID          string        `yaml:"id,omitempty" json:"Id,omitempty"`
+	Related     []RelatedRule `yaml:"related,omitempty" json:"related,omitempty"`
+	Status      string        `yaml:"status,omitempty" json:"status,omitempty"`
+	Description string        `yaml:"description,omitempty" json:"Description,omitempty"`
+	Author      string        `yaml:"author,omitempty" json:"Author,omitempty"`
+	Level       string        `yaml:"level,omitempty" json:"Level,omitempty"`
+	References  []string      `yaml:"references,omitempty" json:"References,omitempty"`
+	Tags        []string      `yaml:"tags,omitempty" json:"Tags,omitempty"`
 
 	// Any non-standard fields will end up in here
 	AdditionalFields map[string]interface{} `yaml:",inline,omitempty" json:",inline,omitempty"`
@@ -32,18 +34,18 @@ type RelatedRule struct {
 }
 
 type Logsource struct {
-	Category   string `yaml:",omitempty" json:",omitempty"`
-	Product    string `yaml:",omitempty" json:",omitempty"`
-	Service    string `yaml:",omitempty" json:",omitempty"`
-	Definition string `yaml:",omitempty" json:",omitempty"`
+	Category   string `yaml:"category,omitempty" json:"Category,omitempty"`
+	Product    string `yaml:"product,omitempty" json:"Product,omitempty"`
+	Service    string `yaml:"service,omitempty" json:"Service,omitempty"`
+	Definition string `yaml:"definition,omitempty" json:"Definition,omitempty"`
 
 	// Any non-standard fields will end up in here
 	AdditionalFields map[string]interface{} `yaml:",inline,omitempty" json:",inline,omitempty"`
 }
 
 type Detection struct {
-	Searches   map[string]Search `yaml:",inline" json:",inline"`
-	Conditions Conditions        `yaml:"condition" json:"condition"`
+	Searches   map[string]Search `yaml:"searches,inline,omitempty" json:"Searches,inline,omitempty"`
+	Conditions Conditions        `yaml:"condition,omitempty" json:"Condition,omitempty"`
 
 	// This is not actually supported right now since there are no
 	// aggregates so we just preserve it in its string form.
@@ -83,6 +85,15 @@ func (d *Detection) UnmarshalYAML(node *yaml.Node) error {
 
 	}
 	return nil
+}
+
+type Correlation struct {
+	Type      string                 `json:"type,omitempty" yaml:"type,omitempty"`
+	Rules     []string               `json:"rules,omitempty" yaml:"rules,omitempty"`
+	GroupBy   []string               `json:"group-by,omitempty" yaml:"group-by,omitempty"`
+	Timespan  string                 `json:"timespan,omitempty" yaml:"timespan,omitempty"`
+	Condition map[string]interface{} `json:"condition,omitempty" yaml:"condition,omitempty"`
+	Generate  bool                   `json:"generate,omitempty" yaml:"generate,omitempty"`
 }
 
 type Conditions []Condition
@@ -133,9 +144,9 @@ func (c Conditions) MarshalYAML() (interface{}, error) {
 }
 
 type Search struct {
-	node          *yaml.Node     `yaml:",omitempty" json:",omitempty"`
-	Keywords      []string       `yaml:",omitempty" json:",omitempty"`
-	EventMatchers []EventMatcher `yaml:",omitempty" json:",omitempty"`
+	node          *yaml.Node
+	Keywords      []string       `yaml:"keywords,omitempty" json:"keywords,omitempty"`
+	EventMatchers []EventMatcher `yaml:"event_matchers,omitempty" json:"event_matchers,omitempty"`
 }
 
 func (s *Search) UnmarshalYAML(node *yaml.Node) error {
@@ -230,10 +241,10 @@ func (f EventMatcher) MarshalYAML() (interface{}, error) {
 }
 
 type FieldMatcher struct {
-	node      *yaml.Node    `yaml:",omitempty" json:",omitempty"`
-	Field     string        `yaml:",omitempty" json:",omitempty"`
-	Modifiers []string      `yaml:",omitempty" json:",omitempty"`
-	Values    []interface{} `yaml:",omitempty" json:",omitempty"`
+	node      *yaml.Node
+	Field     string        `yaml:"field,omitempty" json:"field,omitempty"`
+	Modifiers []string      `yaml:"modifiers,omitempty" json:"modifiers,omitempty"`
+	Values    []interface{} `yaml:"values,omitempty" json:"values,omitempty"`
 }
 
 // Position returns the line and column of this FieldMatcher in the original input

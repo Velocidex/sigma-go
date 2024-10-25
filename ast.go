@@ -4,15 +4,14 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/Velocidex/sigma-go/internal/grammar"
 	"gopkg.in/yaml.v3"
-
-	"github.com/bradleyjkemp/sigma-go/internal/grammar"
 )
 
 type Condition struct {
-	node        *yaml.Node      `yaml:",omitempty" json:",omitempty"`
-	Search      SearchExpr      `yaml:",omitempty" json:",omitempty"`
-	Aggregation AggregationExpr `yaml:",omitempty" json:",omitempty"`
+	node        *yaml.Node
+	Search      SearchExpr      `yaml:"search,omitempty" json:"Search,omitempty"`
+	Aggregation AggregationExpr `yaml:"aggregation,omitempty" json:"Aggregation,omitempty"`
 }
 
 func (c Condition) MarshalYAML() (interface{}, error) {
@@ -133,7 +132,7 @@ func (AllOfThem) toString() string {
 }
 
 type SearchIdentifier struct {
-	Name string
+	Name string `yaml:"name,omitempty" json:"Name,omitempty"`
 }
 
 func (SearchIdentifier) searchExpr() {}

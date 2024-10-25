@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/bradleyjkemp/sigma-go"
-	"github.com/bradleyjkemp/sigma-go/evaluator/modifiers"
+
+	"github.com/Velocidex/sigma-go"
+	"github.com/Velocidex/sigma-go/evaluator/modifiers"
 )
 
 type RuleEvaluator struct {
@@ -77,9 +78,12 @@ func ForRule(rule sigma.Rule, options ...Option) *RuleEvaluator {
 }
 
 type Result struct {
-	Match            bool            // whether this event matches the Sigma rule
-	SearchResults    map[string]bool // For each Search, whether it matched the event
-	ConditionResults []bool          // For each Condition, whether it matched the event
+	// whether this event matches the Sigma rule
+	Match bool `json:"Match"`
+	// For each Search, whether it matched the event
+	SearchResults map[string]bool `json:"SearchResults"`
+	// For each Condition, whether it matched the event
+	ConditionResults []bool `json:"ConditionResults"`
 }
 
 // Event should be some form a map[string]interface{} or map[string]string
