@@ -1,7 +1,6 @@
 package sigma
 
 import (
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -10,6 +9,7 @@ import (
 
 	"github.com/bradleyjkemp/cupaloy/v2"
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"gopkg.in/yaml.v3"
 )
 
