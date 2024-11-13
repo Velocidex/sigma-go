@@ -21,8 +21,12 @@ type Rule struct {
 	Description string        `yaml:"description,omitempty" json:"Description,omitempty"`
 	Author      string        `yaml:"author,omitempty" json:"Author,omitempty"`
 	Level       string        `yaml:"level,omitempty" json:"Level,omitempty"`
-	References  []string      `yaml:"references,omitempty" json:"References,omitempty"`
-	Tags        []string      `yaml:"tags,omitempty" json:"Tags,omitempty"`
+
+	// This field can be a list of strings or a single string. We
+	// actually never care about this field so we just preserve it.
+	// https://sigmahq.io/docs/basics/rules.html#metadata-references
+	References interface{} `yaml:"references,omitempty" json:"References,omitempty"`
+	Tags       []string    `yaml:"tags,omitempty" json:"Tags,omitempty"`
 
 	// Any non-standard fields will end up in here
 	AdditionalFields map[string]interface{} `yaml:",inline,omitempty" json:",inline,omitempty"`
